@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="padding_small">8dp</dimen>
+
+    <dimen name="padding_medium">16dp</dimen>
+
+    <dimen name="padding_large">24dp</dimen>
+
+    <dimen name="corner_radius">16dp</dimen>
+
+    <dimen name="button_height">56dp</dimen>
+
+    <dimen name="card_elevation">4dp</dimen>
+
+    <!-- Home Dashboard -->
+    <dimen name="screen_padding">16dp</dimen>
+
+    <dimen name="card_radius_large">20dp</dimen>
+
+    <dimen name="toolbar_icon_size">24dp</dimen>
+
+    <dimen name="quick_action_card_size">100dp</dimen>
+
+    <dimen name="sos_button_size">120dp</dimen>
+
+    <dimen name="section_spacing">20dp</dimen>
+
+</resources>

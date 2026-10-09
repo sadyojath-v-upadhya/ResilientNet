@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Primary -->
+    <color name="primary">#2563EB</color>
+    <color name="primary_dark">#1D4ED8</color>
+    <color name="primary_light">#DBEAFE</color>
+
+    <!-- SOS -->
+    <color name="sos_red">#DC2626</color>
+    <color name="sos_red_dark">#B91C1C</color>
+
+    <!-- Success -->
+    <color name="success">#16A34A</color>
+
+    <!-- Warning -->
+    <color name="warning">#F59E0B</color>
+
+    <!-- Background -->
+    <color name="background">#F8FAFC</color>
+
+    <!-- Surface -->
+    <color name="surface">#FFFFFF</color>
+
+    <!-- Text -->
+    <color name="text_primary">#111827</color>
+    <color name="text_secondary">#6B7280</color>
+
+    <!-- Divider -->
+    <color name="divider">#E5E7EB</color>
+
+    <!-- White & Black -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="primary_blue">#1565C0</color>
+    <color name="card_background">#F8FAFC</color>
+    <color name="button_blue">#1565C0</color>
+    <color name="background_white">#FFFFFF</color>
+
+    <color name="indicator_active">#1565C0</color>
+
+    <color name="indicator_inactive">#D1D5DB</color>
+
+    <color name="button_text">#FFFFFF</color>
+    <!-- Home Dashboard -->
+    <color name="status_connected">#22C55E</color>
+    <color name="status_offline">#EF4444</color>
+
+    <color name="light_blue_background">#E8F1FD</color>
+    <color name="light_blue">#E3F2FD</color>
+
+    <color name="card_shadow">#10000000</color>
+
+    <color name="light_gray">#D3D3D3</color>
+
+    <color name="light_red">#FEECEC</color>
+    <color name="red">#D32F2F</color>
+
+    <color name="error">#B3261E</color>
+    <color name="error_container">#F9DEDC</color>
+    <color name="on_error_container">#410E0B</color>
+
+</resources>

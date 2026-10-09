@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/dashboard_nav_graph"
+    app:startDestination="@id/homeFragment"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.resilientnet.ui.home.HomeFragment"
+        android:label="Home">
+
+        <action
+            android:id="@+id/action_homeFragment_to_sosFragment"
+            app:destination="@id/sosFragment"/>
+
+        <action
+            android:id="@+id/action_homeFragment_to_nearbyDevicesFragment"
+            app:destination="@id/nearbyDevicesFragment"/>
+
+        <action
+            android:id="@+id/action_homeFragment_to_emergencyContactsFragment"
+            app:destination="@id/emergencyContactsFragment"/>
+
+        <action
+            android:id="@+id/action_homeFragment_to_resourcesFragment"
+            app:destination="@id/resourcesFragment"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/sosFragment"
+        android:name="com.resilientnet.ui.sos.SosFragment"
+        android:label="SOS"/>
+
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="com.resilientnet.ui.chat.ChatFragment"
+        android:label="Chat"/>
+
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="com.resilientnet.ui.map.MapFragment"
+        android:label="Map"/>
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.resilientnet.ui.profile.ProfileFragment"
+        android:label="Profile">
+
+        <action
+            android:id="@+id/action_profileFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.resilientnet.ui.profile.EditProfileFragment"
+        android:label="Edit Profile"/>
+
+    <fragment
+        android:id="@+id/nearbyDevicesFragment"
+        android:name="com.resilientnet.ui.bluetooth.NearbyDevicesFragment"
+        android:label="Nearby Devices"
+        tools:layout="@layout/fragment_nearby_devices">
+
+        <action
+            android:id="@+id/action_nearbyDevicesFragment_to_wifiDirectFragment"
+            app:destination="@id/wifiDirectFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/wifiDirectFragment"
+        android:name="com.resilientnet.ui.wifidirect.WifiDirectFragment"
+        android:label="Wi-Fi Direct P2P"
+        tools:layout="@layout/fragment_wifi_direct" />
+
+    <fragment
+        android:id="@+id/emergencyContactsFragment"
+        android:name="com.resilientnet.ui.contacts.EmergencyContactsFragment"
+        android:label="Emergency Contacts"
+        tools:layout="@layout/fragment_emergency_contacts" />
+
+    <fragment
+        android:id="@+id/resourcesFragment"
+        android:name="com.resilientnet.ui.resources.ResourcesFragment"
+        android:label="Relief Resources"
+        tools:layout="@layout/fragment_resources" />
+
+</navigation>
