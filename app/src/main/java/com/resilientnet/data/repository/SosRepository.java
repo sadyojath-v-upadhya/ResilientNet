@@ -32,7 +32,16 @@ public class SosRepository {
     }
 
     public void insert(SosEntity sosEntity) {
-        executorService.execute(() -> sosDao.insertSos(sosEntity));
+        insert(sosEntity, null);
+    }
+
+    public void insert(SosEntity sosEntity, Runnable onInserted) {
+        executorService.execute(() -> {
+            sosDao.insertSos(sosEntity);
+            if (onInserted != null) {
+                onInserted.run();
+            }
+        });
     }
 
     public void update(SosEntity sosEntity) {

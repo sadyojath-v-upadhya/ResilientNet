@@ -417,7 +417,15 @@ public class SosFragment extends Fragment {
                         false
                 );
 
-        viewModel.insert(sosEntity);
+        viewModel.insert(sosEntity, () -> {
+            if (getActivity() instanceof MainActivity) {
+                MainActivity mainActivity = (MainActivity) getActivity();
+                if (mainActivity.getCommunicationManager() != null
+                        && mainActivity.getCommunicationManager().getInternetGatewayManager() != null) {
+                    mainActivity.getCommunicationManager().getInternetGatewayManager().triggerManualSync(null);
+                }
+            }
+        });
 
         // ---------------------------------------------------------
         // 2. Create network message

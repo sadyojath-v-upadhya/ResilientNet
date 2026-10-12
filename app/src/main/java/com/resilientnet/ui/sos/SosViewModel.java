@@ -31,6 +31,10 @@ public class SosViewModel extends AndroidViewModel {
         repository.insert(sosEntity);
     }
 
+    public void insert(SosEntity sosEntity, Runnable onInserted) {
+        repository.insert(sosEntity, onInserted);
+    }
+
     public void update(SosEntity sosEntity) {
         repository.update(sosEntity);
     }

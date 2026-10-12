@@ -218,6 +218,24 @@ public class BackendSyncManager {
         JSONArray msgArray = new JSONArray();
         if (msgList != null) {
             for (MessageEntity msg : msgList) {
+                // Skip sending duplicate local SOS messages in the messages array if already in sosAlerts
+                boolean isDuplicateSos = false;
+                if (MessageConstants.SOS.equals(msg.getMessageType()) && sosList != null) {
+                    for (SosEntity sos : sosList) {
+                        String sosMsg = sos.getMessage();
+                        String sosType = sos.getEmergencyType();
+                        String msgContent = msg.getContent();
+                        if (msgContent != null && ((sosMsg != null && !sosMsg.isEmpty() && msgContent.contains(sosMsg))
+                                || (sosType != null && !sosType.isEmpty() && msgContent.startsWith(sosType)))) {
+                            isDuplicateSos = true;
+                            break;
+                        }
+                    }
+                }
+                if (isDuplicateSos) {
+                    continue;
+                }
+
                 JSONObject item = new JSONObject();
                 item.put("messageId", msg.getMessageId());
                 item.put("senderId", msg.getSenderId());

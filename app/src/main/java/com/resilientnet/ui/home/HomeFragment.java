@@ -39,6 +39,7 @@ import com.resilientnet.permissions.BluetoothPermissionHelper;
 import com.resilientnet.ui.bluetooth.BluetoothViewModel;
 import com.resilientnet.ui.contacts.EmergencyContactsManager;
 import com.resilientnet.ui.dashboard.DashboardFragment;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.resilientnet.ui.home.adapter.SosHistoryAdapter;
 
 public class HomeFragment extends Fragment {
@@ -360,12 +361,8 @@ public class HomeFragment extends Fragment {
                             mainActivity.getCommunicationManager().getInternetGatewayManager();
                     if (gatewayManager != null) {
                         gatewayManager.refreshGatewayState();
-                        if (!gatewayManager.isGatewayOnline()) {
-                            Toast.makeText(requireContext(), "Offline: Operating in Mesh Mode", Toast.LENGTH_SHORT).show();
-                            return;
-                        }
 
-                        Toast.makeText(requireContext(), "Syncing with cloud gateway...", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(requireContext(), "Connecting to " + sessionManager.getBackendApiUrl() + "...", Toast.LENGTH_SHORT).show();
                         gatewayManager.triggerManualSync(new SyncCallback() {
                                 @Override
                                 public void onSyncStarted() {
@@ -383,7 +380,7 @@ public class HomeFragment extends Fragment {
                                     }
                                     Toast.makeText(
                                             requireContext(),
-                                            "Sync complete: " + syncedSosCount + " SOS uploaded",
+                                            "Sync complete: " + syncedSosCount + " SOS uploaded to Web Dashboard",
                                             Toast.LENGTH_SHORT
                                     ).show();
                                 }
@@ -395,14 +392,38 @@ public class HomeFragment extends Fragment {
                                     }
                                     Toast.makeText(
                                             requireContext(),
-                                            "Sync notice: " + errorMessage,
-                                            Toast.LENGTH_SHORT
+                                            "Sync failed: " + errorMessage + "\n(Long-press to edit backend IP)",
+                                            Toast.LENGTH_LONG
                                     ).show();
                                 }
                             });
                     }
                 }
             }
+        });
+
+        // Long press on Cloud Gateway allows user to view / edit Backend URL
+        binding.txtGatewayStatus.setOnLongClickListener(v -> {
+            android.widget.EditText input = new android.widget.EditText(requireContext());
+            input.setText(sessionManager.getBackendApiUrl());
+            input.setSelection(input.getText().length());
+            input.setPadding(40, 20, 40, 20);
+
+            new MaterialAlertDialogBuilder(requireContext())
+                    .setTitle("Backend Gateway URL")
+                    .setMessage("Set the laptop server URL on your Wi-Fi network:")
+                    .setView(input)
+                    .setPositiveButton("Save & Sync", (dialog, which) -> {
+                        String newUrl = input.getText().toString().trim();
+                        if (!newUrl.isEmpty()) {
+                            sessionManager.setBackendApiUrl(newUrl);
+                            Toast.makeText(requireContext(), "Backend URL updated", Toast.LENGTH_SHORT).show();
+                            binding.txtGatewayStatus.performClick();
+                        }
+                    })
+                    .setNegativeButton("Cancel", null)
+                    .show();
+            return true;
         });
     }
 

@@ -95,7 +95,9 @@ public class InternetGatewayManager {
                         @NonNull NetworkCapabilities networkCapabilities) {
 
                     boolean hasInternet = networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
-                            && networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED);
+                            || networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)
+                            || networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)
+                            || networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET);
 
                     Log.d(TAG, "Gateway default network capabilities changed: hasInternet = " + hasInternet);
                     isGatewayNodeLiveData.postValue(hasInternet);
@@ -133,7 +135,7 @@ public class InternetGatewayManager {
     }
 
     /**
-     * Checks if the device currently possesses validated Internet capabilities.
+     * Checks if the device currently possesses active network capabilities (Wi-Fi, Cellular, or validated Internet).
      */
     public boolean checkActiveInternetConnection() {
         if (connectivityManager == null) {
@@ -151,8 +153,12 @@ public class InternetGatewayManager {
                 return false;
             }
 
+            // On local emergency LANs (e.g. connecting to laptop on same Wi-Fi), NET_CAPABILITY_VALIDATED
+            // can be false if external internet is unavailable or slow. We allow connection if on Wi-Fi/Cellular/Ethernet:
             return caps.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
-                    && caps.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED);
+                    || caps.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)
+                    || caps.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)
+                    || caps.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET);
         } catch (Exception e) {
             Log.e(TAG, "Error checking active internet: " + e.getMessage());
             return false;

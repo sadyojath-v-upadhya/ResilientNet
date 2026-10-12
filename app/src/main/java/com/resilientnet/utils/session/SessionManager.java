@@ -16,7 +16,7 @@ public class SessionManager {
 
     private static final String KEY_DEVICE_ID = "device_id";
     private static final String KEY_BACKEND_URL = "backend_url";
-    private static final String DEFAULT_BACKEND_URL = "http://10.0.2.2:8080/api/emergency/sync";
+    private static final String DEFAULT_BACKEND_URL = "http://192.168.1.108:5000/api/emergency/sync";
 
     public SessionManager(Context context) {
         preferences = context.getSharedPreferences(
